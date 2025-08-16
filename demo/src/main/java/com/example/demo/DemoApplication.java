@@ -1,18 +1,25 @@
 package com.example.demo;
 
-import com.example.demo.config.AppConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootApplication
 public class DemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
-	}
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class, Car.class);
 
+        ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+
+
+        // Getting the methods/functions of class A. B and C
+
+        A functionA = context.getBean(A.class);
+        // B functionB = context.getBean(B.class); // Error -> not marked as @Component so no bean has been created for class B.
+        C functionC = context.getBean(C.class);
+
+        functionA.getMessage();
+        functionC.getMessage();
+	}
 
 }
