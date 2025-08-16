@@ -20,6 +20,9 @@ public class DemoApplication {
 
         functionA.getMessage();
         functionC.getMessage();
+
+        MyClass myClass = context.getBean(MyClass.class);
+        myClass.run();
 	}
 
 }
