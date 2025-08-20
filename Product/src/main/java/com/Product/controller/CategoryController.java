@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryController {
 
-    @Autowired
+    // @Autowired
     private CategoryService categoryService;
 
     // Create category
