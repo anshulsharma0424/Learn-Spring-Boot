@@ -3,6 +3,7 @@ package com.Product.service;
 import com.Product.dto.ProductDTO;
 import com.Product.entity.Category;
 import com.Product.entity.Product;
+import com.Product.exception.CategoryNotFoundException;
 import com.Product.mapper.ProductMapper;
 import com.Product.repository.CategoryRepository;
 import com.Product.repository.ProductRepository;
@@ -22,7 +23,7 @@ public class ProductService {
 
     // Create Product
     public ProductDTO createProduct(ProductDTO productDTO) {
-        Category category = categoryRepository.findById(productDTO.getCategoryId()).orElseThrow(() -> new RuntimeException("Category Not Found"));
+        Category category = categoryRepository.findById(productDTO.getCategoryId()).orElseThrow(() -> new CategoryNotFoundException("Category with id:" + productDTO.getCategoryId() + " not found"));
 
         // DTO to Entity
         Product product = ProductMapper.toProductEntity(productDTO, category);
