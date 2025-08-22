@@ -1,6 +1,7 @@
 package com.Product.controller;
 
 import com.Product.dto.CategoryDTO;
+import com.Product.exception.CategoryAlreadyExistsException;
 import com.Product.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,16 @@ public class CategoryController {
     private CategoryService categoryService;
 
     // Create category
+    // public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
     @PostMapping
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
-        return new ResponseEntity<>(categoryService.createCategory(categoryDTO), HttpStatus.CREATED);
+    public ResponseEntity<?> createCategory(@RequestBody CategoryDTO categoryDTO) {
+        try{
+            CategoryDTO savedCategory = categoryService.createCategory(categoryDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
+        } catch (CategoryAlreadyExistsException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        }
+        // return new ResponseEntity<>(categoryService.createCategory(categoryDTO), HttpStatus.CREATED);
     }
 
     // Get all categories

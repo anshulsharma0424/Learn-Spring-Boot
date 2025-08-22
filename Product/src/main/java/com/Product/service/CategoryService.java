@@ -2,12 +2,14 @@ package com.Product.service;
 
 import com.Product.dto.CategoryDTO;
 import com.Product.entity.Category;
+import com.Product.exception.CategoryAlreadyExistsException;
 import com.Product.mapper.CategoryMapper;
 import com.Product.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 // In Services -> Creating business logic
 
@@ -23,6 +25,13 @@ public class CategoryService {
 
     // Create category
     public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+
+        // Check if the category already exists?
+        Optional<Category> optionalCategory = categoryRepository.findByName(categoryDTO.getName());
+        if (optionalCategory.isPresent()) {
+            throw new CategoryAlreadyExistsException("Category " + categoryDTO.getName() + " already exists");
+        }
+
        Category category = CategoryMapper.toCategoryEntity(categoryDTO);
         category = categoryRepository.save(category);
         return CategoryMapper.toCategoryDTO(category);
