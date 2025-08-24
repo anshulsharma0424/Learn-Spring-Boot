@@ -1,5 +1,6 @@
 package com.Product;
 
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -16,6 +17,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                         name = "Developer",
                         email = "developer@companyDeveloper.com"
                 )
+        ),
+        externalDocs = @ExternalDocumentation(
+                description = "Here is the External documentation's description.",
+                url = "example.com"
         )
 )
 
