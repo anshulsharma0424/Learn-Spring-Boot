@@ -32,4 +32,7 @@ public class UserService {
         return UserMapper.toUserResponse(user);
     }
 
+    public Boolean existsByUserId(String userId) {
+        return userRepository.existsById(userId);
+    }
 }

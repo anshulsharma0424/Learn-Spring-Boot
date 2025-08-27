@@ -13,8 +13,16 @@ import org.springframework.stereotype.Service;
 public class ActivityService {
     private final ActivityRepository activityRepository;
     private final ActivityMapper activityMapper;
+    private final UserValidationService userValidationService;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
+
+        boolean isValidUser = userValidationService.validateUser(request.getUserId());
+
+        if (!isValidUser) {
+            throw new RuntimeException("Invalid user: " + request.getUserId());
+        }
+
         Activity activity = activityMapper.toActivityEntity(request);
         Activity savedActivity = activityRepository.save(activity);
         return activityMapper.toActivityResponse(savedActivity);
