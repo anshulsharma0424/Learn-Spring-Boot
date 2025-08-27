@@ -26,7 +26,7 @@ public class UserService {
         return UserMapper.toUserResponse(savedUser);
     }
 
-    public UserResponse getUserById(Long id){
+    public UserResponse getUserById(String id){
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User with UserID: " + id + " doesn't exist"));
         return UserMapper.toUserResponse(user);

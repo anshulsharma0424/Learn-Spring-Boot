@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class UserResponse {
-    private Long id;
+    private String id;
     private String email;
     // private String password; // We don't want to expose the password to the user
     private String firstName;
