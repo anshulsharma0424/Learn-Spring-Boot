@@ -1,6 +1,5 @@
 package com.fitness.aiservice.controller;
 
-import com.fitness.activityservice.entity.Activity;
 import com.fitness.aiservice.entity.Recommendation;
 import com.fitness.aiservice.service.RecommendationService;
 import lombok.RequiredArgsConstructor;
